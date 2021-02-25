@@ -1,0 +1,91 @@
+@import '../scss/reset';
+
+body,
+html {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+.excel-to-js {
+  height: 100%;
+  width: 100%;
+  background: #2D3543;
+  text-align: center;
+  padding: 20px;
+}
+
+.panel {
+  display: inline-block;
+  background-color: #3F485A;
+  width: 300px;
+  height: 200px;
+  padding: 20px;
+  color: #FFF;
+  border-radius: 4px;
+
+  &__title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  &__file {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #2B3340;
+    border-radius: 4px;
+  }
+
+  &__output {
+    margin-bottom: 10px;
+  }
+}
+
+.output {
+  width: 100%;
+  height: calc(100% - 220px);
+  background-color: #3F485A;
+  margin-top: 20px;
+  padding: 20px;
+  text-align: left;
+  border-radius: 4px;
+
+  &__title {
+    color: #FFF;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  &__area {
+    background-color: #7B8BA7;
+    height: calc(100% - 34px);
+    width: 100%;
+    border-radius: 4px;
+    overflow: auto;
+  }
+
+  table {
+    width: 100%;
+    table-layout: fixed;
+
+    th {
+      text-align: center;
+      border: 1px solid #000;
+    }
+
+    td {
+      border: 1px solid #000;
+
+      span {
+        display: inline-block;
+        overflow: hidden;
+        word-break: break-all;
+        width: 100%;
+      }
+    }
+  }
+}
