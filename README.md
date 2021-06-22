@@ -11,10 +11,14 @@ It will backup your excel to specific location of your server. If you put it on 
 1. npm install
 2. npm run build
 3. Create a folder name "exceltojs" in NAS web server directory.
+```sh
   $ mkdir /share/Web/exceltojs
+```
 4. Create a folder name "uploads" in "exceltojs" folder. Make sure its permission is writable.
+```sh
   $ mkdir /share/Web/exceltojs/uploads
   $ chmod 777 /share/Web/exceltojs/uploads/
+```
 5. Put files in build directory on QNAP NAS.
 6. Put files in api directory on QNAP NAS.
 
