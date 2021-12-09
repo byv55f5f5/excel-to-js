@@ -5,6 +5,7 @@ import JSZip from 'jszip';
 import {
   parseEs2015FileContents, parseEs2015StringTable,
   parseNvsStringTable, parseNvsFileContents,
+  parseJsonFileContents,
 } from './parsers';
 import download from './downloadZip';
 import uploadFile from './uploadFile';
@@ -14,7 +15,7 @@ import './style.scss';
 const App = () => {
   const file = useRef(null);
   const [sheetJsonData, setSheetJsonData] = useState([]);
-  const [type, setType] = useState('es2015');
+  const [type, setType] = useState('json');
 
   const handleOutputTypeChange = (e) => {
     setType(e.target.value);
@@ -23,7 +24,13 @@ const App = () => {
   const handleSaveClick = () => {
     const zip = new JSZip();
     const folder = zip.folder('lang');
-    if (type === 'es2015') {
+    if (type === 'json') {
+      const stringTable = parseEs2015StringTable(sheetJsonData);
+      Object.keys(stringTable).forEach((lang) => {
+        const fileContents = parseJsonFileContents(stringTable, lang);
+        folder.file(`${lang}.json`, fileContents, { base64: false });
+      });
+    } else if (type === 'es2015') {
       const stringTable = parseEs2015StringTable(sheetJsonData);
 
       Object.keys(stringTable).forEach((lang) => {
@@ -106,6 +113,7 @@ const App = () => {
         </div>
         <div className="panel__output">
           <select name="output-type" id="output-type" onChange={handleOutputTypeChange} value={type}>
+            <option value="json">JSON</option>
             <option value="es2015">ES 2015</option>
             <option value="nvs">NVS</option>
           </select>

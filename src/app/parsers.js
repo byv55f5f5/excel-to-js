@@ -6,12 +6,27 @@ export const parseEs2015StringTable = (sheetJsonData) => {
       Object.keys(data).forEach((lang) => {
         if (lang !== 'KEY') {
           if (!stringTable[lang]) stringTable[lang] = {};
-          stringTable[lang][key] = data[lang];
+          stringTable[lang][key] = data[lang].toString();
         }
       });
     }
   });
   return stringTable;
+};
+
+export const parseJsonFileContents = (stringTable, lang) => {
+  const strings = stringTable[lang];
+  const parsed = {};
+  Object.keys(strings).forEach((key) => {
+    if (key.includes('.')) {
+      const [key1, key2] = key.split('.');
+      if (!parsed[key1]) parsed[key1] = {};
+      parsed[key1][key2] = strings[key];
+    } else {
+      parsed[key] = strings[key];
+    }
+  });
+  return JSON.stringify(parsed, null, '\t');
 };
 
 export const parseEs2015FileContents = (stringTable, lang) => {
